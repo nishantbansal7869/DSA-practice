@@ -2,6 +2,13 @@ package com.practice.sorting;
 
 import java.util.Arrays;
 
+/*
+* To improve the quick sort time complexity instead of taking first or last element as pivot element we
+* select a random index between l and h as a pivot and swap it with first or last index based on partition
+* being used and then apply quick sort. In this way time complexity becomes O(n log n)
+* */
+
+
 public class QuickSortUsingLomutoPartition {
     public static void main(String[] args) {
         int arr[] = new int[]{3,2,5,4,1,6,9,8,7};

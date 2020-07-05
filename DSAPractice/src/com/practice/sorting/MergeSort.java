@@ -4,19 +4,20 @@ import java.util.Arrays;
 
 public class MergeSort {
     public static void main(String[] args) {
-        int arr[] = new int[]{3,2,1,6,5,7,8};
-        mergeSort(arr,0,arr.length-1);
+        int arr[] = new int[]{10,5,3,9,2};
+        int k = 7;
+        mergeSort(arr,0,arr.length-1, k);
         Arrays.stream(arr).forEach(s->System.out.println(s));
     }
-    public static void mergeSort(int[] arr, int l, int r){
+    public static void mergeSort(int[] arr, int l, int r, int k){
         if(r>l){
             int m = (l+r)/2;
-            mergeSort(arr,l,m);
-            mergeSort(arr,m+1,r);
-            merge(arr,l,m,r);
+            mergeSort(arr,l,m,k);
+            mergeSort(arr,m+1,r,k);
+            merge(arr,l,m,r,k);
         }
     }
-    public static void merge(int[] arr, int l, int m ,int r){
+    public static void merge(int[] arr, int l, int m ,int r, int p){
        int n1 = m-l+1;
        int n2 = r-m;
        int larr[] = new int[n1];
@@ -31,7 +32,7 @@ public class MergeSort {
        int j = 0;
        int k = l;
        while(i < n1 && j < n2){
-           if(larr[i] <= rarr[j]){
+           if(Math.abs(p-larr[i]) <= Math.abs(p-rarr[j])){
                arr[k++] = larr[i++];
            }
            else {

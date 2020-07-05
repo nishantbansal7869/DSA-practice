@@ -20,8 +20,10 @@ public class Test {
        System.out.println("After null");
        //php.show();
        //php.display();
-       java.show();
-       java.display();
+     //  java.show();
+       //java.display();
+       String s = "Java";
+       System.out.println(s.substring(0,1));
     }
 }
 
