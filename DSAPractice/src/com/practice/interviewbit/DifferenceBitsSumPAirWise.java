@@ -35,18 +35,22 @@ public class DifferenceBitsSumPAirWise {
     }
 
     private static int findsum(ArrayList<Integer> arr) {
-        int[] count = new int[32];
-        for (int a : arr){
-            for (int i = 0; i < 32; i++){
-                count[i] += a&1;
-                a = a>>1;
-            }
-        }
-        long res = 0;
-        for (int i = 0; i < 32; i++){
-            res += ((long)count[i] * (arr.size()-count[i]))%1000000007;
-        }
-        return (int)(2*res%1000000007);
+      int m = (int)1e9+7;
+      long ans = 0;
+      for (int i = 0; i < 31; i++){
+          int set = 0;
+          for (int j : arr){
+              if(checkBit(j, i) != 0){
+                set++;
+              }
+          }
+          ans = (ans + (long)(set * (arr.size()-set))%m)%m;
+      }
+      return (int)(2*ans)%m;
+    }
+
+    private static int checkBit(int j, int i) {
+        return j&(1<<i);
     }
 
 }
