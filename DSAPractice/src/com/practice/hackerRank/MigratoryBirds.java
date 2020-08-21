@@ -14,18 +14,19 @@ public class MigratoryBirds {
         System.out.println(migratoryBirds(arr,arr.size()));
     }
     public static int migratoryBirds(List<Integer> arr, int n){
-        int arr1[] = new int[6];
-        for(int i = 0; i < arr.size(); i++){
-            arr1[arr.get(i)]  = (arr1[arr.get(i)]+1)%10000007;
+        int temp[] = new int[6];
+        for (int i : arr){
+            temp[i]++;
         }
-        int maxCount = arr1[0];
-        int index = 0;
-        for(int i = 0; i < 6; i++){
-            if(arr1[i] > maxCount){
-                maxCount = arr1[i];
-                index = i;
+        int max = Integer.MIN_VALUE;
+        int idx = 0;
+        for (int i = 1; i <= 5; i++){
+            if (max < temp[i])
+            {
+                max = temp[i];
+                idx = i;
             }
         }
-        return index;
+        return idx;
     }
 }

@@ -28,6 +28,7 @@ public class DifferenceBitsSumPAirWise {
     public static void main(String[] args) {
         ArrayList<Integer> arr = new ArrayList<>();
         arr.add(1);
+        arr.add(2);
         arr.add(3);
         arr.add(5);
         int result = findsum(arr);
@@ -44,9 +45,9 @@ public class DifferenceBitsSumPAirWise {
                 set++;
               }
           }
-          ans = (ans + (long)(set * (arr.size()-set))%m)%m;
+          ans += ((long)set * (arr.size() - set))%m;
       }
-      return (int)(2*ans)%m;
+      return (int)(2*ans%m);
     }
 
     private static int checkBit(int j, int i) {
