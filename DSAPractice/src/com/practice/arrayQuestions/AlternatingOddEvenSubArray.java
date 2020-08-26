@@ -1,3 +1,4 @@
+/**/
 package com.practice.arrayQuestions;
 
 public class AlternatingOddEvenSubArray {
