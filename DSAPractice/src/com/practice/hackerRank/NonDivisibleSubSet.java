@@ -20,15 +20,19 @@ public class NonDivisibleSubSet {
         for (int i : list){
             arr[i%k]++;
         }
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < k-1; i++){
-            for (int j = i+1; j < k; j++){
-                if (i + j != k) {
-                   int  tempMax = Math.max(arr[i], arr[j]);
-                   max = Math.max(max, tempMax);
-                }
-            }
+        int i = 1;
+        int j = k-1;
+        int ans = 0;
+        while (i < j){
+            int tempMax = Math.max(arr[i], arr[j]);
+            ans += tempMax;
+            i++;
+            j--;
         }
-        return max;
+        if (arr[0]>0)
+            ans += 1;
+        if (k%2==0 && arr[k/2] > 0)
+            ans += 1;
+        return ans;
     }
 }
