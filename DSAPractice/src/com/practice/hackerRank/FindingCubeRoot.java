@@ -19,7 +19,7 @@ public class FindingCubeRoot {
         if (negSign)
             n = -1 * n;
         long low = 1;
-        long high = (long) Math.sqrt(n);
+        long high = (long)1e6;
         while (low <= high){
             long mid = (low+high)/2;
             long mul = mid*mid*mid;
