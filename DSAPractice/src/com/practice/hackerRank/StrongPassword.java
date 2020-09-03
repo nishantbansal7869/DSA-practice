@@ -2,6 +2,7 @@ package com.practice.hackerRank;
 
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class StrongPassword {
     public static void main(String[] args) {
@@ -13,55 +14,60 @@ public class StrongPassword {
     }
 
     private static int strongPassword(int n, String s) {
-        String num = "0123456789";
-        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
-        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numbers = "0123456789";
+        String smallChar = "abcdefghijklmnopqrstuvwxyz";
+        String capsChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String specialChar = "!@#$%^&*()-+";
-        HashSet<Character> set = new HashSet<>();
-        for (int i = 0; i < s.length(); i++)
+
+        boolean numberPresent = false;
+        boolean smallCharPresent = false;
+        boolean capsPresent = false;
+        boolean specialCharPresent = false;
+
+        Set<Character> set = new HashSet<>();
+
+        for (int i = 0; i < n; i++)
             set.add(s.charAt(i));
-        boolean containNum = false;
-        boolean containLowerCase = false;
-        boolean containUpperCase = false;
-        boolean containSpecialChar = false;
-        for (int i = 0; i < num.length(); i++)
-            if (set.contains(num.charAt(i)))
-            {
-                containNum = true;
-                break;
-            }
-        for (int i = 0; i < lowerCase.length(); i++)
-            if (set.contains(lowerCase.charAt(i))){
-                containLowerCase = true;
-                break;
-            }
-        for (int i = 0; i < upperCase.length(); i++)
-            if (set.contains(upperCase.charAt(i))){
-                containUpperCase = true;
-                break;
-            }
-        for (int i = 0; i < specialChar.length(); i++)
-            if (set.contains(specialChar.charAt(i))){
-                containSpecialChar = true;
-                break;
-            }
-        int count = 0;
-        if (!containLowerCase)
-            count++;
-        if (!containNum)
-            count++;
-        if (!containUpperCase)
-            count++;
-        if (!containSpecialChar)
-            count++;
 
-        if (s.length() >= 6)
-            return count;
-        else {
-            if (containLowerCase && containNum && containSpecialChar && containUpperCase)
-                return 6 - s.length();
-
+        for (int i = 0; i < numbers.length(); i++){
+            if (set.contains(numbers.charAt(i))){
+                numberPresent = true;
+                break;
+            }
         }
-        return 1;
+        for (int i = 0; i < smallChar.length(); i++){
+            if (set.contains(smallChar.charAt(i))){
+                smallCharPresent = true;
+                break;
+            }
+        }
+        for (int i = 0; i < capsChar.length(); i++){
+            if (set.contains(capsChar.charAt(i))){
+                capsPresent = true;
+                break;
+            }
+        }
+        for (int i = 0; i < specialChar.length(); i++){
+            if (set.contains(specialChar.charAt(i))){
+                specialCharPresent = true;
+                break;
+            }
+        }
+        int count = 0;
+        if (!numberPresent)
+            count++;
+        if (!smallCharPresent)
+            count++;
+        if (!capsPresent)
+            count++;
+        if (!specialCharPresent)
+            count++;
+
+        if (n < 6 && count < 6 - n)
+            return 6 - n;
+        if (n < 6 && count > 6 - n)
+            return count;
+
+        return count;
     }
 }

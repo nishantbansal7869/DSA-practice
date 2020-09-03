@@ -37,6 +37,38 @@ Cut-1: [a][b]
 * */
 package com.practice.contest;
 
+import java.util.Scanner;
+
 public class SplittingString {
-    //To-do
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int test = sc.nextInt();
+        while (test > 0){
+            String s = sc.next();
+            int ans = splittingString(s);
+            System.out.println(ans);
+            test--;
+        }
+    }
+    static int ans = Integer.MAX_VALUE;
+    private static int splittingString(String s) {
+        if (s.length() > 1 && s.length()%2 != 0)
+            return 0;
+        if (valid(s))
+            return 1;
+
+        int count = 0;
+        count += splittingString(s.substring(0, s.length()/2));
+        count += splittingString(s.substring(s.length()/2));
+        return count;
+    }
+
+    private static boolean valid(String s) {
+        if (s.length() == 1)
+            return true;
+        for (int i = 0; i < s.length()-1; i++)
+            if (s.charAt(i) != s.charAt(i+1))
+                return false;
+        return true;
+    }
 }
