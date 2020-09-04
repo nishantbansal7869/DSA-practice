@@ -19,8 +19,18 @@ public class WeightedUniformStrings {
     private static String[] weightedUniformStrings(String s, int[] queries) {
         String ans[]  = new String[queries.length];
         int[] count = new int[26];
-        for (int i = 0; i < s.length(); i++)
-           count[s.charAt(i)-'a']++;
+        int l = 0;
+        while (l < s.length()){
+            char c = s.charAt(l);
+            int j = l;
+            if (count[c - 'a'] == 0) {
+                while (j < s.length() && s.charAt(j) == c) {
+                    count[c - 'a']++;
+                    j++;
+                }
+            }
+            l++;
+        }
         int idx = 0;
         boolean flag = false;
         for (int q : queries){
