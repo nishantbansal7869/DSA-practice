@@ -45,22 +45,31 @@ public class SplittingString {
         int test = sc.nextInt();
         while (test > 0){
             String s = sc.next();
-            int ans = splittingString(s);
+            if (s.length() > 1 && s.length() % 2 != 0)
+                if (!valid(s)){
+                    System.out.println(-1);
+                    test--;
+                    continue;
+                }
+            splittingString(s, 0);
             System.out.println(ans);
             test--;
         }
     }
     static int ans = Integer.MAX_VALUE;
-    private static int splittingString(String s) {
-        if (s.length() > 1 && s.length()%2 != 0)
-            return 0;
-        if (valid(s))
-            return 1;
-
-        int count = 0;
-        count += splittingString(s.substring(0, s.length()/2));
-        count += splittingString(s.substring(s.length()/2));
-        return count;
+    private static void splittingString(String s, int count) {
+        if (s.length() > 1 && s.length() % 2 != 0){
+            if (!valid(s)) {
+                ans = ans != Integer.MAX_VALUE? ans : Integer.MAX_VALUE;
+                return;
+            }
+        }
+        if (valid(s)){
+            ans = Math.min(ans, count);
+            return;
+        }
+        splittingString(s.substring(0, s.length()/2), count+1);
+        splittingString(s.substring(s.length()/2), count + 1);
     }
 
     private static boolean valid(String s) {
