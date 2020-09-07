@@ -45,14 +45,19 @@ public class SplittingString {
         int test = sc.nextInt();
         while (test > 0){
             String s = sc.next();
-            if (s.length() > 1 && s.length() % 2 != 0)
-                if (!valid(s)){
+            if (s.length() > 1 && s.length() % 2 != 0) {
+                if (!valid(s)) {
                     System.out.println(-1);
                     test--;
                     continue;
                 }
+            }
             splittingString(s, 0);
-            System.out.println(ans);
+            if (ans == Integer.MAX_VALUE)
+                System.out.println(-1);
+            else
+                System.out.println(ans);
+            ans = Integer.MAX_VALUE;
             test--;
         }
     }
