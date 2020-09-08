@@ -132,8 +132,8 @@ public class LargestPallindromicSubstringHard {
     }
 
     private static void computePower(int n) {
-        power1.add(0,0);
-        power2.add(0,0);
+        power1.add(0,1);
+        power2.add(0,1);
         power1.add(1, p1);
         power2.add(1, p2);
         for (int i = 2; i <= n+1; i++){
