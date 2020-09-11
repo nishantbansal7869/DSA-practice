@@ -1,5 +1,6 @@
 package com.practice.interviewbit;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class CompareVersionNumbers {
@@ -26,6 +27,8 @@ public class CompareVersionNumbers {
         int i = 0;
         int j = 0;
         while (i < arr.length && j < brr.length){
+            BigInteger b = new BigInteger(arr[i]);
+            b.compareTo(new BigInteger("1"));
             int k = Integer.parseInt(arr[i]);
             int l = Integer.parseInt(brr[j]);
             if (k < l)
