@@ -7,57 +7,44 @@ import java.io.InputStreamReader;
 public class AddBinaryString {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String a = br.readLine();
-        String b = br.readLine();
+        String[] arr = br.readLine().split(" ");
+        String a = arr[0];
+        String b = arr[1];
         String ans = binaryString(a,b);
         System.out.println(ans);
     }
 
     private static String binaryString(String a, String b) {
-        int carry = 0;
-        int i = a.length() - 1;
-        int j = b.length() - 1;
-        int count = 0;
-        StringBuilder sb = new StringBuilder("");
-        while (i >= 0 && j >= 0){
-            count = 0;
-            int n =  carry ^ (a.charAt(i) - '0') ^ (b.charAt(j) - '0');
-            sb.append(n);
-            if (n == 0){
-                if (carry == 1)
-                    count++;
-                if (a.charAt(i) - '0' == 1)
-                    count++;
-                if (b.charAt(j) - '0' == 1)
-                    count++;
-                if (count >= 2)
-                    carry = 1;
-            }
-            else
-                carry = 0;
-            i--;
-            j--;
-        }
-        while (i >= 0) {
-            int n = carry ^ a.charAt(i) - '0';
-            sb.append(n);
-            if (n == 1) {
-                carry = 0;
-            }
-            i--;
-        }
+     StringBuilder s1 = new StringBuilder(a);
+     StringBuilder s2 = new StringBuilder(b);
+     int l1 = s1.length();
+     int l2 = s2.length();
+     int diff = Math.abs(l1 - l2);
+     if (l1 > l2){
+         while (diff > 0) {
+             s2.insert(0, '0');
+             diff--;
+         }
+     }
+     else {
+         while (diff > 0){
+             s1.insert(0, '0');
+             diff--;
+         }
+     }
 
-        while (j >= 0) {
-            int n = carry ^ b.charAt(j) - '0';
-            sb.append(n);
-            if (n == 1) {
-                carry = 0;
-            }
-            j--;
-        }
-
-        if (carry == 1)
-            sb.append(1);
-        return sb.reverse().toString();
+     StringBuilder ans = new StringBuilder("");
+     int sum = 0;
+     int carry = 0;
+     int i = s1.length()-1;
+     while (i >= 0){
+         sum = (carry + (s1.charAt(i)-'0') + (s2.charAt(i) - '0'))%2;
+         ans.insert(0, sum);
+         carry = (carry + (s1.charAt(i)-'0') + (s2.charAt(i) - '0'))/2;
+         i--;
+     }
+     if (carry == 1)
+         ans.insert(0, carry);
+     return ans.toString();
     }
 }
