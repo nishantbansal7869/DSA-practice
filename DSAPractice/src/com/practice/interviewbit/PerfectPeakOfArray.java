@@ -24,9 +24,9 @@ public class PerfectPeakOfArray {
 
         int max = list.get(0);
         for (int i = 1; i < n-1; i++){
-            max = Math.max(max, list.get(i));
-            if (max == min[i])
+            if (list.get(i) > max && list.get(i) < min[i+1])
                 return 1;
+            max = Math.max(max, list.get(i));
         }
         return 0;
     }
