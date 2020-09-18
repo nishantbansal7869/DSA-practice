@@ -18,17 +18,15 @@ public class CountingSubarrays {
     }
 
     private static int countSubarray(ArrayList<Integer> list, int b) {
-       int sum = list.get(0);
-       int count = 0;
-       int p1 = 0;
-       int p2 = 1;
-       while (true){
-           while (sum < b && p2 < list.size()){
-               sum += list.get(p2);
-               p2++;
-           }
-           int n = p2-p1-1;
-
-       }
+      int count = 0;
+      int sum = 0;
+      int p1 = 0;
+      for (int i = 0; i < list.size(); i++){
+          sum += list.get(i);
+          while (sum >= b && p1 <= i)
+              sum -= list.get(p1++);
+          count += i - p1 + 1;
+      }
+      return count;
     }
 }
