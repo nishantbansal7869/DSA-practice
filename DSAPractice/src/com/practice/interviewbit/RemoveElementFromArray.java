@@ -15,28 +15,27 @@ public class RemoveElementFromArray {
         String[] arr = s.split(" ");
         for (int i = 0; i < arr.length; i++)
             a.add(Integer.parseInt(arr[i]));
-        int b = 2;
+        int b = Integer.parseInt(br.readLine());
         int newSize = removeElement(a, b);
         System.out.println(newSize);
     }
 
     private static int removeElement(ArrayList<Integer> a, int b) {
-       int i = 0;
-       for (int j = 1; j < a.size(); j++){
-           if (!a.get(j).equals(b)){
-               while (i < j){
-                   if (a.get(i).equals(b)) {
-                       a.set(i, a.get(j));
-                       i++;
-                       break;
-                   }
-                   i++;
-               }
-           }
-       }
-       while (a.size() > i+1)
-           a.remove(a.size()-1);
-       System.out.println(a);
-       return a.size();
+      int p1 = 0;
+      int p2 = 1;
+      while (true){
+          while (p1 < a.size() && a.get(p1) != b)
+              p1++;
+          if (p2 < p1)
+              p2 = p1;
+          while (p2 < a.size() && a.get(p2) == b)
+              p2++;
+          if (p1 == a.size() || p2 == a.size())
+              break;
+          Collections.swap(a, p1, p2);
+      }
+      while (a.size() > p1)
+          a.remove(a.size()-1);
+      return a.size();
     }
 }
