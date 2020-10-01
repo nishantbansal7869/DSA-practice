@@ -149,6 +149,7 @@ public class BinaryTree {
             return node;
         return leftLCA != null ? leftLCA : rightLCA;
     }
+
     static Node mirrorTree(Node node){
         if (node == null)
             return node;

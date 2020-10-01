@@ -20,7 +20,8 @@ public class TreeView {
         rightView(tree.root, 1);
         System.out.println();
         topView(tree.root);
-
+        System.out.println();
+        bottomView(tree.root);
     }
 
     static int maxLevel = 0;
@@ -71,6 +72,31 @@ public class TreeView {
         }
 
         for (Integer i : map.keySet()){
+            System.out.print(map.get(i).data + " ");
+        }
+    }
+
+    static void bottomView(Node1 node){
+        class queueObj{
+            Node1 node;
+            int hd;
+            public queueObj(Node1 node, int hd){
+                this.node = node;
+                this.hd = hd;
+            }
+        }
+        Queue<queueObj> queue = new ArrayDeque<>();
+        Map<Integer, Node1> map = new TreeMap<>();
+        queue.add(new queueObj(node, 0));
+        while (!queue.isEmpty()){
+            queueObj temp = queue.poll();
+            map.put(temp.hd, temp.node);
+            if (temp.node.left != null)
+                queue.add(new queueObj(temp.node.left, temp.hd-1));
+            if (temp.node.right != null)
+                queue.add(new queueObj(temp.node.right, temp.hd+1));
+        }
+        for (int i : map.keySet()){
             System.out.print(map.get(i).data + " ");
         }
     }
