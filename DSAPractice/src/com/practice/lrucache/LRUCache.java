@@ -81,7 +81,6 @@ class LRUCacheImpl{
         mapKey.put(key, data);
     }
 
-    //returns first element in the cache
     int get(int key){
         if (map.containsKey(key)) {
             replaceData(key, mapKey.get(key));
