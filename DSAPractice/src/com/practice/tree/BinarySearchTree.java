@@ -28,6 +28,7 @@ public class BinarySearchTree {
         System.out.println();
         System.out.println(findLCA(tree.root, 3,6).data);
         ArrayList<Integer> path = longestPath(tree.root);
+        System.out.println("LongestPath");
         Collections.reverse(path);
         for (int i : path){
             System.out.print(i + " ");
