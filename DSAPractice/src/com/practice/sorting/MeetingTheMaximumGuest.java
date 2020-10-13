@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class MeetingTheMaximumGuest {
     public static void main(String[] args) {
-        int arrival[] = new int[]{900,940,950,1100,1500,1800};
-        int depart[] = new int[]{910,1200,1120,1130,1900,2000};
+        int arrival[] = new int[]{1,5,15};
+        int depart[] = new int[]{5,10,20};
         System.out.println(maxGuest(arrival,depart,arrival.length,depart.length));
     }
     private static int maxGuest(int[] arrival, int[] depart, int n, int m){
