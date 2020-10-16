@@ -41,8 +41,8 @@ public class Rhymes {
             int idx = sb.charAt(i) - 'a';
             if (root.c[idx] == null) {
                 root.c[idx] = new Node();
-                root.c[idx].count = Math.max(root.count, word.length());
             }
+            root.c[idx].count = Math.max(root.c[idx].count, word.length());
             root = root.c[idx];
         }
     }
