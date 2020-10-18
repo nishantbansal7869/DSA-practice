@@ -1,9 +1,7 @@
 package com.practice.hackerRank.heap;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class MAxPairSum {
     public static void main(String[] args)throws IOException {
@@ -32,23 +30,46 @@ public class MAxPairSum {
 
     private static ArrayList<Integer> maxPairSum(int[] arr, int[] arr1, int k) {
         ArrayList<Integer> list = new ArrayList<>();
-        PriorityQueue<Integer> p = new PriorityQueue<>();
-        for (int i = 0; i < arr.length; i++){
-            for (int j = 0; j < arr.length; j++){
-                if (!p.isEmpty() && p.size() == k)
-                {
-                    if (p.peek() < arr[i] + arr1[j]) {
-                        p.poll();
-                        p.add(arr[i] + arr1[j]);
-                    }
-                }
-                else
-                    p.add(arr[i] + arr1[j]);
+        Arrays.sort(arr);
+        Arrays.sort(arr1);
+        int n = arr.length-1;
+        PriorityQueue<Pair> p = new PriorityQueue<>(Collections.reverseOrder(new Compare()));
+        HashSet<Pair> set = new HashSet<>();
+        p.add(new Pair(arr[n]+arr1[n], n, n));
+        set.add(new Pair(arr[n]+arr1[n], n, n));
+        while (list.size() != k){
+            Pair temp = p.poll();
+            list.add(temp.sum);
+            Pair p1 = new Pair(arr[temp.i-1] + arr1[temp.j], temp.i-1, temp.j);
+            Pair p2 = new Pair(arr[temp.i] + arr1[temp.j-1], temp.i , temp.j-1);
+            if (!set.contains(p1)) {
+                set.add(p1);
+                p.add(p1);
+            }
+            if (!set.contains(p2)) {
+                set.add(p2);
+                p.add(p2);
             }
         }
-        while (!p.isEmpty())
-            list.add(p.poll());
-        Collections.reverse(list);
-        return list;
+    return list;
+    }
+}
+
+class Pair{
+    int sum;
+    int i;
+    int j;
+    Pair(int sum, int i, int j){
+        this.sum = sum;
+        this.i = i;
+        this.j = j;
+    }
+}
+
+class Compare implements Comparator<Pair>{
+
+    @Override
+    public int compare(Pair o1, Pair o2) {
+        return o1.sum - o2.sum;
     }
 }
