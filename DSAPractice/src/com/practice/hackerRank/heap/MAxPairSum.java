@@ -37,18 +37,22 @@ public class MAxPairSum {
         HashSet<Pair> set = new HashSet<>();
         p.add(new Pair(arr[n]+arr1[n], n, n));
         set.add(new Pair(arr[n]+arr1[n], n, n));
-        while (list.size() != k){
+        while (!p.isEmpty() && list.size() != k){
             Pair temp = p.poll();
             list.add(temp.sum);
-            Pair p1 = new Pair(arr[temp.i-1] + arr1[temp.j], temp.i-1, temp.j);
-            Pair p2 = new Pair(arr[temp.i] + arr1[temp.j-1], temp.i , temp.j-1);
-            if (!set.contains(p1)) {
-                set.add(p1);
-                p.add(p1);
+            if (temp.i-1 > 0) {
+                Pair p1 = new Pair(arr[temp.i - 1] + arr1[temp.j], temp.i - 1, temp.j);
+                if (!set.contains(p1)) {
+                    set.add(p1);
+                    p.add(p1);
+                }
             }
-            if (!set.contains(p2)) {
-                set.add(p2);
-                p.add(p2);
+            if (temp.j-1 > 0) {
+                Pair p2 = new Pair(arr[temp.i] + arr1[temp.j - 1], temp.i, temp.j - 1);
+                if (!set.contains(p2)) {
+                    set.add(p2);
+                    p.add(p2);
+                }
             }
         }
     return list;

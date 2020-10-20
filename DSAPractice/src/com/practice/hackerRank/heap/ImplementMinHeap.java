@@ -72,9 +72,9 @@ class MinHeap{
             int child1 = 2*p+1;
             int child2 = 2*p+2;
             int idx = child1;
-            if (child2 <= idx && list.get(child2) < list.get(child1))
+            if (child2 <= this.idx && list.get(child2) < list.get(child1))
                 idx = child2;
-            if (list.get(0) > list.get(idx)){
+            if (list.get(p) > list.get(idx)){
                 Collections.swap(list, p, idx);
             }
             else
