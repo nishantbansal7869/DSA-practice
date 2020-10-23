@@ -2,6 +2,7 @@ package com.practice.hackerRank.heap;
 
 import java.io.*;
 import java.util.*;
+import javafx.util.Pair;
 
 public class MAxPairSum {
     public static void main(String[] args)throws IOException {
@@ -21,7 +22,8 @@ public class MAxPairSum {
                 arr1[i] = Integer.parseInt(s3[i]);
             }
             ArrayList<Integer> ans = maxPairSum(arr, arr1, k);
-            bw.write(ans+"");
+            for (int i : ans)
+                bw.write(i+" ");
             bw.newLine();
             test--;
         }
@@ -33,47 +35,46 @@ public class MAxPairSum {
         Arrays.sort(arr);
         Arrays.sort(arr1);
         int n = arr.length-1;
-        PriorityQueue<Pair> p = new PriorityQueue<>(Collections.reverseOrder(new Compare()));
-        HashSet<Pair> set = new HashSet<>();
-        p.add(new Pair(arr[n]+arr1[n], n, n));
-        set.add(new Pair(arr[n]+arr1[n], n, n));
+        PriorityQueue<Pairs> p = new PriorityQueue<>(Collections.reverseOrder(new Compare()));
+        HashSet<Pair<Integer, Integer>> set = new HashSet<>();
+        p.add(new Pairs(arr[n]+arr1[n], n, n));
+        set.add(new Pair<>(n, n));
         while (!p.isEmpty() && list.size() != k){
-            Pair temp = p.poll();
+            Pairs temp = p.poll();
             list.add(temp.sum);
-            if (temp.i-1 > 0) {
-                Pair p1 = new Pair(arr[temp.i - 1] + arr1[temp.j], temp.i - 1, temp.j);
-                if (!set.contains(p1)) {
-                    set.add(p1);
+            if (temp.i-1 >= 0) {
+                Pairs p1 = new Pairs(arr[temp.i - 1] + arr1[temp.j], temp.i - 1, temp.j);
+                if (!set.contains(new Pair<>(temp.i-1, temp.j))) {
+                    set.add(new Pair<>(temp.i-1, temp.j));
                     p.add(p1);
                 }
             }
-            if (temp.j-1 > 0) {
-                Pair p2 = new Pair(arr[temp.i] + arr1[temp.j - 1], temp.i, temp.j - 1);
-                if (!set.contains(p2)) {
-                    set.add(p2);
+            if (temp.j-1 >= 0) {
+                Pairs p2 = new Pairs(arr[temp.i] + arr1[temp.j - 1], temp.i, temp.j - 1);
+                if (!set.contains(new Pair<>(temp.i, temp.j-1))) {
+                    set.add(new Pair<>(temp.i, temp.j-1));
                     p.add(p2);
                 }
             }
         }
-    return list;
+        return list;
     }
 }
-
-class Pair{
+class Pairs{
     int sum;
     int i;
     int j;
-    Pair(int sum, int i, int j){
+    Pairs(int sum, int i, int j){
         this.sum = sum;
         this.i = i;
         this.j = j;
     }
 }
 
-class Compare implements Comparator<Pair>{
+class Compare implements Comparator<Pairs>{
 
     @Override
-    public int compare(Pair o1, Pair o2) {
+    public int compare(Pairs o1, Pairs o2) {
         return o1.sum - o2.sum;
     }
 }
